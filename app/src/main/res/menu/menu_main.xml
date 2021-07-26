@@ -1,0 +1,18 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto"
+      xmlns:tools="http://schemas.android.com/tools"
+      tools:context="com.router.battery.MainActivity"
+        android:theme="@style/Theme.RouterBattery.NoActionBar">
+
+    <item android:id="@+id/action_refresh"
+          android:title="@string/refresh"
+          android:orderInCategory="100"
+          android:icon="@drawable/outline_sync_24"
+          app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/action_notify"
+          android:title="@string/switch_text"
+          android:orderInCategory="100"
+          android:icon="@drawable/outline_notifications_24"
+          app:showAsAction="ifRoom"/>
+</menu>
