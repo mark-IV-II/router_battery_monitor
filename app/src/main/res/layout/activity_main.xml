@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             tools:context=".MainActivity"
+             android:orientation="horizontal"
+             tools:actionBarNavMode="standard">
+
+
+    <androidx.appcompat.widget.Toolbar
+            android:id="@+id/app_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/Theme.RouterBattery.NoActionBar"
+            app:popupTheme="@style/Theme.RouterBattery.PopupOverlay"
+            app:menu="@menu/menu_main">
+    </androidx.appcompat.widget.Toolbar>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/recycler_view"
+            app:layoutManager="LinearLayoutManager"
+            android:scrollbars="vertical"
+            android:layout_marginTop="?attr/actionBarSize"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+<!--    <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="?android:attr/windowBackground"-->
+<!--            android:layout_gravity="bottom"-->
+<!--            app:layout_behavior="com.google.android.material.behavior.HideBottomViewOnScrollBehavior">-->
+
+<!--        <TextView-->
+<!--                android:text="@string/last_refresh"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/last_refresh"-->
+<!--                android:layout_gravity="center_vertical"-->
+<!--                android:layout_margin="20dp"/>-->
+<!--        <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/refresh_time"-->
+<!--                android:layout_gravity="end"-->
+<!--                android:layout_margin="20dp"/>-->
+<!--    </com.google.android.material.bottomnavigation.BottomNavigationView>-->
+
+</FrameLayout>
