@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -46,6 +47,7 @@ class MainActivity : AppCompatActivity() {
 
         val model: ScrapViewModel by viewModels()
         model.valuesLiveDataValue.observe(this, Observer{values: Map<String, String> -> checkAndLoad(values)})
+        startWorker()
 
     }
 
@@ -71,7 +73,7 @@ class MainActivity : AppCompatActivity() {
         R.id.action_notify -> {
             AlertDialog.Builder(this).also { alert = it }
             alert.setTitle("Turn on or turn off the notifications")
-                .setMessage("Turn this on to see a notification showing status and battery percentage. A low battery warning will also be shown when the percentage is below 15 and is discharging")
+                .setMessage("Turn this on to see a notification showing status and battery percentage. A low battery warning will also be shown when the percentage is below 20 and is discharging")
                 .setCancelable(true)
                 .setPositiveButton("On", DialogInterface.OnClickListener { dialog, _ -> startWorker(); dialog.cancel() })
                 .setNegativeButton("Off", DialogInterface.OnClickListener { dialog, _ -> stopWorker(); dialog.cancel() }).create().show()
@@ -106,13 +108,14 @@ class MainActivity : AppCompatActivity() {
 
         val model: ScrapViewModel by viewModels()
         Log.d("Main Activity calling", "Refreshing stuff")
+        if (forceRefresh){Toast.makeText(applicationContext, "Refreshing.....", Toast.LENGTH_SHORT).show()}
         model.retrieveValues(forceRefresh = forceRefresh)
 
     }
 
     private fun checkAndLoad(values: Map<String, String>){
         Log.d("Main check", "checking and loading")
-//        findViewById<TextView>(R.id.refresh_time).text = values["time"]
+////        findViewById<TextView>(R.id.refresh_time).text = values["time"]
         if (values["isError"] == null){
             refreshStatus()
         }
@@ -130,6 +133,7 @@ class MainActivity : AppCompatActivity() {
             recyclerView.adapter = ItemAdapter(this, cardValues)
             recyclerView.setHasFixedSize(true)
         }
+        Toast.makeText(applicationContext, "Refresh Complete", Toast.LENGTH_SHORT).show()
 
     }
 }
