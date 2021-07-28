@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -47,7 +48,7 @@ class MainActivity : AppCompatActivity() {
 
         val model: ScrapViewModel by viewModels()
         model.valuesLiveDataValue.observe(this, Observer{values: Map<String, String> -> checkAndLoad(values)})
-        startWorker()
+//        startWorker()
 
     }
 
@@ -99,7 +100,7 @@ class MainActivity : AppCompatActivity() {
             applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         Log.d("Main is calling", "Stop worker called")
         nManager.cancel("statusNotifier",0)
-        if(!(worker.getWorkInfosByTag("scrapper").isCancelled)) {
+        if(!(worker.getWorkInfosByTag("ScrapperWork").isCancelled)) {
             worker.cancelUniqueWork("scrapperRouterBattery")
         }
     }
@@ -110,12 +111,13 @@ class MainActivity : AppCompatActivity() {
         Log.d("Main Activity calling", "Refreshing stuff")
         if (forceRefresh){Toast.makeText(applicationContext, "Refreshing.....", Toast.LENGTH_SHORT).show()}
         model.retrieveValues(forceRefresh = forceRefresh)
+        Toast.makeText(applicationContext, "Refresh Complete", Toast.LENGTH_SHORT).show()
 
     }
 
     private fun checkAndLoad(values: Map<String, String>){
         Log.d("Main check", "checking and loading")
-////        findViewById<TextView>(R.id.refresh_time).text = values["time"]
+        findViewById<TextView>(R.id.refresh_time).text = values["time"]
         if (values["isError"] == null){
             refreshStatus()
         }
@@ -133,7 +135,5 @@ class MainActivity : AppCompatActivity() {
             recyclerView.adapter = ItemAdapter(this, cardValues)
             recyclerView.setHasFixedSize(true)
         }
-        Toast.makeText(applicationContext, "Refresh Complete", Toast.LENGTH_SHORT).show()
-
     }
 }
