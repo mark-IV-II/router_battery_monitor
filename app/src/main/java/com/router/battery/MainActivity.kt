@@ -71,7 +71,7 @@ class MainActivity : AppCompatActivity() {
         R.id.action_notify -> {
             AlertDialog.Builder(this).also { alert = it }
             alert.setTitle("Turn on or turn off the notifications")
-                .setMessage("Turn this on to see a notification showing status and battery percentage. A low battery warning will also be shown when the percentage is below 15 and is discharging")
+                .setMessage("Turn this on to see a notification showing status and battery percentage. A low battery warning will also be shown when the percentage is below 20 and is discharging")
                 .setCancelable(true)
                 .setPositiveButton("On", DialogInterface.OnClickListener { dialog, _ -> startWorker(); dialog.cancel() })
                 .setNegativeButton("Off", DialogInterface.OnClickListener { dialog, _ -> stopWorker(); dialog.cancel() }).create().show()
